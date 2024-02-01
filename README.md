@@ -13,7 +13,7 @@ A Postman newman test reporter to generate JSON test reports that are [CTRF](htt
 
 A JSON test report schema that is the same structure, no matter which testing tool is used. It's created to provide consistent test reporting agnostic of specific programming languages or testing frameworks. Where many testing frameworks exist, each generating JSON reports in their own way, CTRF provides a standardised schema helping you generate the same report anywhere.
 
-``` json
+```json
 {
   "results": {
     "tool": {
