@@ -1,8 +1,8 @@
 # Postman Newman JSON Reporter - CTRF
 
-A Postman newman test reporter to generate JSON test reports that are [CTRF](https://ctrf.io) compliant.
+A Postman newman JSON test reporter to create test reports that follow the CTRF standard.
 
-[Common Test Report Format](https://ctrf.io) helps you generate JSON reports that are agnostic of specific programming languages or test frameworks.
+[Common Test Report Format](https://ctrf.io) ensures the generation of uniform JSON test reports, independent of programming languages or test framework in use.
 
 ## Features
 
@@ -11,7 +11,13 @@ A Postman newman test reporter to generate JSON test reports that are [CTRF](htt
 
 ## What is CTRF?
 
-A JSON test report schema that is the same structure, no matter which testing tool is used. It's created to provide consistent test reporting agnostic of specific programming languages or testing frameworks. Where many testing frameworks exist, each generating JSON reports in their own way, CTRF provides a standardised schema helping you generate the same report anywhere.
+CTRF is a universal JSON test report schema that addresses the lack of a standardized format for JSON test reports.
+
+**Consistency Across Tools:** Different testing tools and frameworks often produce reports in varied formats. CTRF ensures a uniform structure, making it easier to understand and compare reports, regardless of the testing tool used.
+
+**Language and Framework Agnostic:** It provides a universal reporting schema that works seamlessly with any programming language and testing framework.
+
+**Facilitates Better Analysis:** With a standardized format, programatically analyzing test outcomes across multiple platforms becomes more straightforward.
 
 ```json
 {
@@ -20,9 +26,9 @@ A JSON test report schema that is the same structure, no matter which testing to
       "name": "newman"
     },
     "summary": {
-      "tests": 4,
-      "passed": 3,
-      "failed": 1,
+      "tests": 1,
+      "passed": 1,
+      "failed": 0,
       "pending": 0,
       "skipped": 0,
       "other": 0,
@@ -31,16 +37,15 @@ A JSON test report schema that is the same structure, no matter which testing to
     },
     "tests": [
       {
-        "name": "API Status code is 200",
+        "name": "ctrf should generate the same report with any tool",
         "status": "passed",
-        "duration": 801
-      },
-      ...
+        "duration": 100
+      }
     ],
     "environment": {
       "appName": "MyApp",
-      "buildName": "MyApp",
-      "buildNumber": "100"
+      "buildName": "MyBuild",
+      "buildNumber": "1"
     }
   }
 }
