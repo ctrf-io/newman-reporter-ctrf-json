@@ -1,4 +1,6 @@
-# Postman Newman JSON Reporter - CTRF
+# Newman Postman JSON test results report
+
+> Save Newman Postman test results as a JSON file
 
 A Postman newman JSON test reporter to create test reports that follow the CTRF standard.
 
