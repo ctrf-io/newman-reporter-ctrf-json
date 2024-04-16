@@ -26,7 +26,7 @@ class GenerateCtrfReport {
   readonly ctrfReport: CtrfReport
   readonly ctrfEnvironment: CtrfEnvironment
   readonly reporterConfigOptions: ReporterConfigOptions
-  readonly reporterName = 'jest-ctrf-json-reporter'
+  readonly reporterName = 'newman-reporter-ctrf-json'
   readonly defaultOutputFile = 'ctrf-report.json'
   readonly defaultOutputDir = 'ctrf'
   filename = this.defaultOutputFile
