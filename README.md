@@ -81,6 +81,8 @@ The reporter supports several configuration options passed via the command line:
 newman run ./postman_collection.json -r ctrf-json \
 --reporter-ctrf-json-output-file custom-name.json \
 --reporter-ctrf-json-output-dir custom-directory \
+--reporter-ctrf-json-test-type api \
+--reporter-ctrf-json-minimal false \
 --reporter-ctrf-json-app-name MyApp \
 --reporter-ctrf-json-app-version 1.0.0 \
 --reporter-ctrf-json-os-platform linux \
@@ -106,6 +108,8 @@ The test object in the report includes the following [CTRF properties](https://c
 | `duration` | Number | Required | The time taken for the test execution, in milliseconds.                             |
 | `message`  | String | Optional | The failure message if the test failed.                                             |
 | `trace`    | String | Optional | The stack trace captured if the test failed.                                        |
+| `suite`    | String | Optional | The suite or group to which the test belongs.                                       |
+| `type`     | String | Optional | The type of test (e.g., `api`, `contract`).                                         |
 
 ## Support Us
 

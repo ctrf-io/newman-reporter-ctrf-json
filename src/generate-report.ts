@@ -49,6 +49,10 @@ class GenerateCtrfReport {
         reporterOptions?.ctrfJsonOutputFile ?? this.defaultOutputFile,
       ctrfJsonOutputDir:
         reporterOptions?.ctrfJsonOutputDir ?? this.defaultOutputDir,
+      ctrfJsonMinimal: this.parseBoolean(
+        reporterOptions?.ctrfJsonMinimal ?? 'false'
+      ),
+      ctrfJsonTestType: reporterOptions?.ctrfJsonTestType ?? 'api',
       ctrfJsonAppName: reporterOptions?.ctrfJsonAppName ?? undefined,
       ctrfJsonAppVersion: reporterOptions?.ctrfJsonAppVersion ?? undefined,
       ctrfJsonOsPlatform: reporterOptions?.ctrfJsonOsPlatform ?? undefined,
@@ -116,6 +120,8 @@ class GenerateCtrfReport {
         return
       }
 
+      const collectionName = summary.collection.name
+
       if (
         this.reporterConfigOptions?.ctrfJsonOutputFile !== undefined &&
         this.reporterConfigOptions.ctrfJsonOutputFile !== ''
@@ -137,10 +143,17 @@ class GenerateCtrfReport {
               duration: execution.response.responseTime,
             }
 
+            if (this.reporterConfigOptions.ctrfJsonMinimal === false) {
+              testResult.suite = `${collectionName} > ${execution.item.name}`
+              testResult.type = this.reporterConfigOptions.ctrfJsonTestType
+            }
+
             if (assertion.error != null) {
               testResult.message = assertion.error.message
               testResult.trace = assertion.error.stack
               this.ctrfReport.results.summary.failed += 1
+            } else if (assertion.skipped) {
+              this.ctrfReport.results.summary.skipped += 1
             } else {
               this.ctrfReport.results.summary.passed += 1
             }
@@ -228,6 +241,11 @@ class GenerateCtrfReport {
     } catch (error) {
       console.error(`Error writing ctrf json report:, ${String(error)}`)
     }
+  }
+
+  private parseBoolean(value: string | boolean): boolean {
+    if (typeof value === 'boolean') return value
+    return value.toLowerCase() === 'true'
   }
 }
 
