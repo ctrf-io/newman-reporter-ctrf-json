@@ -1,7 +1,7 @@
 {
   "name": "newman-reporter-ctrf-json",
-  "version": "0.0.4",
-  "description": "",
+  "version": "0.0.5",
+  "description": "Create a common JSON test report for Postman Newman tests",
   "main": "dist/index.js",
   "scripts": {
     "build": "tsc",
@@ -15,8 +15,9 @@
     "dist/",
     "README.md"
   ],
-  "author": "",
-  "license": "ISC",
+  "repository": "github:ctrf-io/newman-reporter-ctrf-json",
+  "author": "Matthew Thomas",
+  "license": "MIT",
   "devDependencies": {
     "@types/newman": "^5.3.5",
     "@types/node": "^20.8.10",

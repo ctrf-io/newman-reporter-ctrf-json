@@ -1,6 +1,7 @@
 import * as fs from 'fs'
 import { type EventEmitter } from 'events'
 import {
+  type CtrfTest,
   type CtrfEnvironment,
   type CtrfReport,
   type CtrfTestState,
@@ -127,7 +128,7 @@ class GenerateCtrfReport {
           execution.assertions.forEach((assertion) => {
             this.ctrfReport.results.summary.tests += 1
 
-            const testResult = {
+            const testResult: CtrfTest = {
               name: assertion.assertion,
               status:
                 assertion.error != null
@@ -137,6 +138,8 @@ class GenerateCtrfReport {
             }
 
             if (assertion.error != null) {
+              testResult.message = assertion.error.message
+              testResult.trace = assertion.error.stack
               this.ctrfReport.results.summary.failed += 1
             } else {
               this.ctrfReport.results.summary.passed += 1
