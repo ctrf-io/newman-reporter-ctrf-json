@@ -87,7 +87,12 @@ newman run ./postman_collection.json -r ctrf-json \
 --reporter-ctrf-json-os-release 18.04 \
 --reporter-ctrf-json-os-version 5.4.0 \
 --reporter-ctrf-json-build-name MyApp \
---reporter-ctrf-json-build-number 100
+--reporter-ctrf-json-build-number 100 \
+--reporter-ctrf-json-build-url https://ctrf.io \
+--reporter-ctrf-json-repository-name ctrf \
+--reporter-ctrf-json-repository-url https://github.com/ctrf-io/newman-reporter-ctrf-json \
+--reporter-ctrf-json-branch-name main \
+--reporter-ctrf-json-test-environment staging
 ```
 
 ## Test Object Properties
