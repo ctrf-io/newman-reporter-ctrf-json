@@ -20,6 +20,11 @@ interface ReporterConfigOptions {
   ctrfJsonOsVersion?: string
   ctrfJsonBuildName?: string
   ctrfJsonBuildNumber?: string
+  ctrfJsonBuildUrl?: string
+  ctrfJsonRepositoryName?: string
+  ctrfJsonRepositoryUrl?: string
+  ctrfJsonBranchName?: string
+  ctrfJsonTestEnvironment?: string
 }
 
 class GenerateCtrfReport {
@@ -50,6 +55,14 @@ class GenerateCtrfReport {
       ctrfJsonOsVersion: reporterOptions?.ctrfJsonOsVersion ?? undefined,
       ctrfJsonBuildName: reporterOptions?.ctrfJsonBuildName ?? undefined,
       ctrfJsonBuildNumber: reporterOptions?.ctrfJsonBuildNumber ?? undefined,
+      ctrfJsonBuildUrl: reporterOptions?.ctrfJsonBuildUrl ?? undefined,
+      ctrfJsonRepositoryName:
+        reporterOptions?.ctrfJsonRepositoryName ?? undefined,
+      ctrfJsonRepositoryUrl:
+        reporterOptions?.ctrfJsonRepositoryUrl ?? undefined,
+      ctrfJsonBranchName: reporterOptions?.ctrfJsonBranchName ?? undefined,
+      ctrfJsonTestEnvironment:
+        reporterOptions?.ctrfJsonTestEnvironment ?? undefined,
     }
 
     this.ctrfReport = {
@@ -109,26 +122,29 @@ class GenerateCtrfReport {
         this.setFilename(this.reporterConfigOptions.ctrfJsonOutputFile)
       }
       summary.run.executions.forEach((execution) => {
-        execution.assertions.forEach((assertion) => {
-          this.ctrfReport.results.summary.tests += 1
+        // eslint-disable-next-line @typescript-eslint/strict-boolean-expressions
+        if (execution.assertions) {
+          execution.assertions.forEach((assertion) => {
+            this.ctrfReport.results.summary.tests += 1
 
-          const testResult = {
-            name: assertion.assertion,
-            status:
-              assertion.error != null
-                ? ('failed' as CtrfTestState)
-                : ('passed' as CtrfTestState),
-            duration: execution.response.responseTime,
-          }
+            const testResult = {
+              name: assertion.assertion,
+              status:
+                assertion.error != null
+                  ? ('failed' as CtrfTestState)
+                  : ('passed' as CtrfTestState),
+              duration: execution.response.responseTime,
+            }
 
-          if (assertion.error != null) {
-            this.ctrfReport.results.summary.failed += 1
-          } else {
-            this.ctrfReport.results.summary.passed += 1
-          }
+            if (assertion.error != null) {
+              this.ctrfReport.results.summary.failed += 1
+            } else {
+              this.ctrfReport.results.summary.passed += 1
+            }
 
-          this.ctrfReport.results.tests.push(testResult)
-        })
+            this.ctrfReport.results.tests.push(testResult)
+          })
+        }
       })
       this.ctrfReport.results.summary.stop = Date.now()
       this.writeReportToFile(this.ctrfReport)
@@ -165,6 +181,27 @@ class GenerateCtrfReport {
     if (reporterConfigOptions.ctrfJsonBuildNumber !== undefined) {
       this.ctrfEnvironment.buildNumber =
         reporterConfigOptions.ctrfJsonBuildNumber
+    }
+    if (reporterConfigOptions.ctrfJsonBuildUrl !== undefined) {
+      this.ctrfEnvironment.buildUrl = reporterConfigOptions.ctrfJsonBuildUrl
+    }
+    if (reporterConfigOptions.ctrfJsonBuildUrl !== undefined) {
+      this.ctrfEnvironment.buildUrl = reporterConfigOptions.ctrfJsonBuildUrl
+    }
+    if (reporterConfigOptions.ctrfJsonRepositoryName !== undefined) {
+      this.ctrfEnvironment.repositoryName =
+        reporterConfigOptions.ctrfJsonRepositoryName
+    }
+    if (reporterConfigOptions.ctrfJsonRepositoryUrl !== undefined) {
+      this.ctrfEnvironment.repositoryUrl =
+        reporterConfigOptions.ctrfJsonRepositoryUrl
+    }
+    if (reporterConfigOptions.ctrfJsonBranchName !== undefined) {
+      this.ctrfEnvironment.branchName = reporterConfigOptions.ctrfJsonBranchName
+    }
+    if (reporterConfigOptions.ctrfJsonTestEnvironment !== undefined) {
+      this.ctrfEnvironment.testEnvironment =
+        reporterConfigOptions.ctrfJsonTestEnvironment
     }
   }
 
