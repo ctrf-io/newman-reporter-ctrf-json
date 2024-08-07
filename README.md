@@ -71,7 +71,7 @@ Run your tests with the reporter argument via the cli:
 newman run ./postman_collection.json -r cli,ctrf-json
 ```
 
-or as a library:
+or programmatically:
 
 ```js
 const newman = require('newman') // require newman in your project
@@ -117,7 +117,7 @@ newman run ./postman_collection.json -r cli,ctrf-json \
 --reporter-ctrf-json-test-environment staging
 ```
 
-or as a library:
+or programmatically:
 
 ```js
 const newman = require('newman') // require newman in your project
