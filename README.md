@@ -65,20 +65,40 @@ CTRF is a universal JSON test report schema that addresses the lack of a standar
 npm install newman-reporter-ctrf-json
 ```
 
-Run your tests with the reporter argument:
+Run your tests with the reporter argument via the cli:
 
 ```bash
-newman run ./postman_collection.json -r ctrf-json
+newman run ./postman_collection.json -r cli,ctrf-json
+```
+
+or as a library:
+
+```js
+const newman = require('newman') // require newman in your project
+
+// call newman.run to pass `options` object and wait for callback
+newman.run(
+  {
+    collection: require('./sample-collection.json'),
+    reporters: ['cli', 'ctrf-json'],
+  },
+  function (err) {
+    if (err) {
+      throw err
+    }
+    console.log('collection run complete!')
+  }
+)
 ```
 
 You'll find a JSON file named `ctrf-report.json` in the `ctrf` directory.
 
 ## Reporter Options
 
-The reporter supports several configuration options passed via the command line:
+The reporter supports several configuration options, you can pass these via the command line:
 
 ```bash
-newman run ./postman_collection.json -r ctrf-json \
+newman run ./postman_collection.json -r cli,ctrf-json \
 --reporter-ctrf-json-output-file custom-name.json \
 --reporter-ctrf-json-output-dir custom-directory \
 --reporter-ctrf-json-test-type api \
@@ -95,6 +115,46 @@ newman run ./postman_collection.json -r ctrf-json \
 --reporter-ctrf-json-repository-url https://github.com/ctrf-io/newman-reporter-ctrf-json \
 --reporter-ctrf-json-branch-name main \
 --reporter-ctrf-json-test-environment staging
+```
+
+or as a library:
+
+```js
+const newman = require('newman') // require newman in your project
+
+// call newman.run to pass `options` object and wait for callback
+newman.run(
+  {
+    collection: require('./sample-collection.json'),
+    reporters: ['cli', 'ctrf-json'],
+    reporter: {
+      'ctrf-json': {
+        outputFile: 'api_report_ctrf.json',
+        outputDir: 'api_reports',
+        minimal: true,
+        testType: 'api',
+        appName: 'MyApp',
+        appVersion: '1.0.0',
+        osPlatform: 'linux',
+        osRelease: '18.04',
+        osVersion: '5.4.0',
+        buildName: 'MyApp',
+        buildNumber: '100',
+        buildUrl: 'https://ctrf.io',
+        repositoryName: 'ctrf',
+        repositoryUrl: 'https://github.com/ctrf-io/newman-reporter-ctrf-json',
+        branchName: 'main',
+        testEnvironment: 'staging',
+      },
+    },
+  },
+  function (err) {
+    if (err) {
+      throw err
+    }
+    console.log('collection run complete!')
+  }
+)
 ```
 
 ## Test Object Properties

@@ -10,22 +10,22 @@ import { type NewmanRunOptions, type NewmanRunSummary } from 'newman'
 import path = require('path')
 
 interface ReporterConfigOptions {
-  ctrfJsonOutputFile?: string
-  ctrfJsonOutputDir?: string
-  ctrfJsonMinimal?: boolean
-  ctrfJsonTestType?: string
-  ctrfJsonAppName?: string
-  ctrfJsonAppVersion?: string
-  ctrfJsonOsPlatform?: string
-  ctrfJsonOsRelease?: string
-  ctrfJsonOsVersion?: string
-  ctrfJsonBuildName?: string
-  ctrfJsonBuildNumber?: string
-  ctrfJsonBuildUrl?: string
-  ctrfJsonRepositoryName?: string
-  ctrfJsonRepositoryUrl?: string
-  ctrfJsonBranchName?: string
-  ctrfJsonTestEnvironment?: string
+  outputFile?: string
+  outputDir?: string
+  minimal?: boolean
+  testType?: string
+  appName?: string
+  appVersion?: string
+  osPlatform?: string
+  osRelease?: string
+  osVersion?: string
+  buildName?: string
+  buildNumber?: string
+  buildUrl?: string
+  repositoryName?: string
+  repositoryUrl?: string
+  branchName?: string
+  testEnvironment?: string
 }
 
 class GenerateCtrfReport {
@@ -45,29 +45,51 @@ class GenerateCtrfReport {
     this.registerEvents()
 
     this.reporterConfigOptions = {
-      ctrfJsonOutputFile:
-        reporterOptions?.ctrfJsonOutputFile ?? this.defaultOutputFile,
-      ctrfJsonOutputDir:
-        reporterOptions?.ctrfJsonOutputDir ?? this.defaultOutputDir,
-      ctrfJsonMinimal: this.parseBoolean(
-        reporterOptions?.ctrfJsonMinimal ?? 'false'
+      outputFile:
+        reporterOptions?.outputFile ??
+        reporterOptions?.outputFile ??
+        this.defaultOutputFile,
+      outputDir:
+        reporterOptions?.outputDir ??
+        reporterOptions?.outputDir ??
+        this.defaultOutputDir,
+      minimal: this.parseBoolean(
+        reporterOptions?.minimal ?? reporterOptions?.minimal ?? 'false'
       ),
-      ctrfJsonTestType: reporterOptions?.ctrfJsonTestType ?? 'api',
-      ctrfJsonAppName: reporterOptions?.ctrfJsonAppName ?? undefined,
-      ctrfJsonAppVersion: reporterOptions?.ctrfJsonAppVersion ?? undefined,
-      ctrfJsonOsPlatform: reporterOptions?.ctrfJsonOsPlatform ?? undefined,
-      ctrfJsonOsRelease: reporterOptions?.ctrfJsonOsRelease ?? undefined,
-      ctrfJsonOsVersion: reporterOptions?.ctrfJsonOsVersion ?? undefined,
-      ctrfJsonBuildName: reporterOptions?.ctrfJsonBuildName ?? undefined,
-      ctrfJsonBuildNumber: reporterOptions?.ctrfJsonBuildNumber ?? undefined,
-      ctrfJsonBuildUrl: reporterOptions?.ctrfJsonBuildUrl ?? undefined,
-      ctrfJsonRepositoryName:
-        reporterOptions?.ctrfJsonRepositoryName ?? undefined,
-      ctrfJsonRepositoryUrl:
-        reporterOptions?.ctrfJsonRepositoryUrl ?? undefined,
-      ctrfJsonBranchName: reporterOptions?.ctrfJsonBranchName ?? undefined,
-      ctrfJsonTestEnvironment:
-        reporterOptions?.ctrfJsonTestEnvironment ?? undefined,
+      testType:
+        reporterOptions?.testType ?? reporterOptions?.testType ?? undefined,
+      appName:
+        reporterOptions?.appName ?? reporterOptions?.appName ?? undefined,
+      appVersion:
+        reporterOptions?.appVersion ?? reporterOptions?.appVersion ?? undefined,
+      osPlatform:
+        reporterOptions?.osPlatform ?? reporterOptions?.osPlatform ?? undefined,
+      osRelease:
+        reporterOptions?.osRelease ?? reporterOptions?.osRelease ?? undefined,
+      osVersion:
+        reporterOptions?.osVersion ?? reporterOptions?.osVersion ?? undefined,
+      buildName:
+        reporterOptions?.buildName ?? reporterOptions?.buildName ?? undefined,
+      buildNumber:
+        reporterOptions?.buildNumber ??
+        reporterOptions?.buildNumber ??
+        undefined,
+      buildUrl:
+        reporterOptions?.buildUrl ?? reporterOptions?.buildUrl ?? undefined,
+      repositoryName:
+        reporterOptions?.repositoryName ??
+        reporterOptions?.repositoryName ??
+        undefined,
+      repositoryUrl:
+        reporterOptions?.repositoryUrl ??
+        reporterOptions?.repositoryUrl ??
+        undefined,
+      branchName:
+        reporterOptions?.branchName ?? reporterOptions?.branchName ?? undefined,
+      testEnvironment:
+        reporterOptions?.testEnvironment ??
+        reporterOptions?.testEnvironment ??
+        undefined,
     }
 
     this.ctrfReport = {
@@ -91,16 +113,16 @@ class GenerateCtrfReport {
 
     this.ctrfEnvironment = {}
 
-    if (this.reporterConfigOptions?.ctrfJsonOutputFile !== undefined)
-      this.setFilename(this.reporterConfigOptions.ctrfJsonOutputFile)
+    if (this.reporterConfigOptions?.outputFile !== undefined)
+      this.setFilename(this.reporterConfigOptions.outputFile)
 
     if (
       !fs.existsSync(
-        this.reporterConfigOptions.ctrfJsonOutputDir ?? this.defaultOutputDir
+        this.reporterConfigOptions.outputDir ?? this.defaultOutputDir
       )
     ) {
       fs.mkdirSync(
-        this.reporterConfigOptions.ctrfJsonOutputDir ?? this.defaultOutputDir,
+        this.reporterConfigOptions.outputDir ?? this.defaultOutputDir,
         { recursive: true }
       )
     }
@@ -123,10 +145,10 @@ class GenerateCtrfReport {
       const collectionName = summary.collection.name
 
       if (
-        this.reporterConfigOptions?.ctrfJsonOutputFile !== undefined &&
-        this.reporterConfigOptions.ctrfJsonOutputFile !== ''
+        this.reporterConfigOptions?.outputFile !== undefined &&
+        this.reporterConfigOptions.outputFile !== ''
       ) {
-        this.setFilename(this.reporterConfigOptions.ctrfJsonOutputFile)
+        this.setFilename(this.reporterConfigOptions.outputFile)
       }
       summary.run.executions.forEach((execution) => {
         // eslint-disable-next-line @typescript-eslint/strict-boolean-expressions
@@ -143,9 +165,9 @@ class GenerateCtrfReport {
               duration: execution.response.responseTime,
             }
 
-            if (this.reporterConfigOptions.ctrfJsonMinimal === false) {
+            if (this.reporterConfigOptions.minimal === false) {
               testResult.suite = `${collectionName} > ${execution.item.name}`
-              testResult.type = this.reporterConfigOptions.ctrfJsonTestType
+              testResult.type = this.reporterConfigOptions.testType
             }
 
             if (assertion.error != null) {
@@ -176,48 +198,45 @@ class GenerateCtrfReport {
   }
 
   setEnvironmentDetails(reporterConfigOptions: ReporterConfigOptions): void {
-    if (reporterConfigOptions.ctrfJsonAppName !== undefined) {
-      this.ctrfEnvironment.appName = reporterConfigOptions.ctrfJsonAppName
+    if (reporterConfigOptions.appName !== undefined) {
+      this.ctrfEnvironment.appName = reporterConfigOptions.appName
     }
-    if (reporterConfigOptions.ctrfJsonAppVersion !== undefined) {
-      this.ctrfEnvironment.appVersion = reporterConfigOptions.ctrfJsonAppVersion
+    if (reporterConfigOptions.appVersion !== undefined) {
+      this.ctrfEnvironment.appVersion = reporterConfigOptions.appVersion
     }
-    if (reporterConfigOptions.ctrfJsonOsPlatform !== undefined) {
-      this.ctrfEnvironment.osPlatform = reporterConfigOptions.ctrfJsonOsPlatform
+    if (reporterConfigOptions.osPlatform !== undefined) {
+      this.ctrfEnvironment.osPlatform = reporterConfigOptions.osPlatform
     }
-    if (reporterConfigOptions.ctrfJsonOsRelease !== undefined) {
-      this.ctrfEnvironment.osRelease = reporterConfigOptions.ctrfJsonOsRelease
+    if (reporterConfigOptions.osRelease !== undefined) {
+      this.ctrfEnvironment.osRelease = reporterConfigOptions.osRelease
     }
-    if (reporterConfigOptions.ctrfJsonOsVersion !== undefined) {
-      this.ctrfEnvironment.osVersion = reporterConfigOptions.ctrfJsonOsVersion
+    if (reporterConfigOptions.osVersion !== undefined) {
+      this.ctrfEnvironment.osVersion = reporterConfigOptions.osVersion
     }
-    if (reporterConfigOptions.ctrfJsonBuildName !== undefined) {
-      this.ctrfEnvironment.buildName = reporterConfigOptions.ctrfJsonBuildName
+    if (reporterConfigOptions.buildName !== undefined) {
+      this.ctrfEnvironment.buildName = reporterConfigOptions.buildName
     }
-    if (reporterConfigOptions.ctrfJsonBuildNumber !== undefined) {
-      this.ctrfEnvironment.buildNumber =
-        reporterConfigOptions.ctrfJsonBuildNumber
+    if (reporterConfigOptions.buildNumber !== undefined) {
+      this.ctrfEnvironment.buildNumber = reporterConfigOptions.buildNumber
     }
-    if (reporterConfigOptions.ctrfJsonBuildUrl !== undefined) {
-      this.ctrfEnvironment.buildUrl = reporterConfigOptions.ctrfJsonBuildUrl
+    if (reporterConfigOptions.buildUrl !== undefined) {
+      this.ctrfEnvironment.buildUrl = reporterConfigOptions.buildUrl
     }
-    if (reporterConfigOptions.ctrfJsonBuildUrl !== undefined) {
-      this.ctrfEnvironment.buildUrl = reporterConfigOptions.ctrfJsonBuildUrl
+    if (reporterConfigOptions.buildUrl !== undefined) {
+      this.ctrfEnvironment.buildUrl = reporterConfigOptions.buildUrl
     }
-    if (reporterConfigOptions.ctrfJsonRepositoryName !== undefined) {
-      this.ctrfEnvironment.repositoryName =
-        reporterConfigOptions.ctrfJsonRepositoryName
+    if (reporterConfigOptions.repositoryName !== undefined) {
+      this.ctrfEnvironment.repositoryName = reporterConfigOptions.repositoryName
     }
-    if (reporterConfigOptions.ctrfJsonRepositoryUrl !== undefined) {
-      this.ctrfEnvironment.repositoryUrl =
-        reporterConfigOptions.ctrfJsonRepositoryUrl
+    if (reporterConfigOptions.repositoryUrl !== undefined) {
+      this.ctrfEnvironment.repositoryUrl = reporterConfigOptions.repositoryUrl
     }
-    if (reporterConfigOptions.ctrfJsonBranchName !== undefined) {
-      this.ctrfEnvironment.branchName = reporterConfigOptions.ctrfJsonBranchName
+    if (reporterConfigOptions.branchName !== undefined) {
+      this.ctrfEnvironment.branchName = reporterConfigOptions.branchName
     }
-    if (reporterConfigOptions.ctrfJsonTestEnvironment !== undefined) {
+    if (reporterConfigOptions.testEnvironment !== undefined) {
       this.ctrfEnvironment.testEnvironment =
-        reporterConfigOptions.ctrfJsonTestEnvironment
+        reporterConfigOptions.testEnvironment
     }
   }
 
@@ -227,7 +246,7 @@ class GenerateCtrfReport {
 
   private writeReportToFile(data: CtrfReport): void {
     const filePath = path.join(
-      this.reporterConfigOptions.ctrfJsonOutputDir ?? this.defaultOutputDir,
+      this.reporterConfigOptions.outputDir ?? this.defaultOutputDir,
       this.filename
     )
     const str = JSON.stringify(data, null, 2)
@@ -235,7 +254,7 @@ class GenerateCtrfReport {
       fs.writeFileSync(filePath, str + '\n')
       console.log(
         `${this.reporterName}: successfully written ctrf json to %s/%s`,
-        this.reporterConfigOptions.ctrfJsonOutputDir,
+        this.reporterConfigOptions.outputDir,
         this.filename
       )
     } catch (error) {
