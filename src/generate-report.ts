@@ -26,6 +26,24 @@ interface ReporterConfigOptions {
   repositoryUrl?: string
   branchName?: string
   testEnvironment?: string
+
+  // CLI-prefixed options
+  ctrfJsonOutputFile?: string
+  ctrfJsonOutputDir?: string
+  ctrfJsonMinimal?: boolean
+  ctrfJsonTestType?: string
+  ctrfJsonAppName?: string
+  ctrfJsonAppVersion?: string
+  ctrfJsonOsPlatform?: string
+  ctrfJsonOsRelease?: string
+  ctrfJsonOsVersion?: string
+  ctrfJsonBuildName?: string
+  ctrfJsonBuildNumber?: string
+  ctrfJsonBuildUrl?: string
+  ctrfJsonRepositoryName?: string
+  ctrfJsonRepositoryUrl?: string
+  ctrfJsonBranchName?: string
+  ctrfJsonTestEnvironment?: string
 }
 
 class GenerateCtrfReport {
@@ -43,53 +61,26 @@ class GenerateCtrfReport {
     private readonly collectionRunOptions: NewmanRunOptions
   ) {
     this.registerEvents()
+    const normalizedOptions = this.normalizeOptions(reporterOptions)
+    console.log('Normalized Options:', JSON.stringify(normalizedOptions))
 
     this.reporterConfigOptions = {
-      outputFile:
-        reporterOptions?.outputFile ??
-        reporterOptions?.outputFile ??
-        this.defaultOutputFile,
-      outputDir:
-        reporterOptions?.outputDir ??
-        reporterOptions?.outputDir ??
-        this.defaultOutputDir,
-      minimal: this.parseBoolean(
-        reporterOptions?.minimal ?? reporterOptions?.minimal ?? 'false'
-      ),
-      testType:
-        reporterOptions?.testType ?? reporterOptions?.testType ?? undefined,
-      appName:
-        reporterOptions?.appName ?? reporterOptions?.appName ?? undefined,
-      appVersion:
-        reporterOptions?.appVersion ?? reporterOptions?.appVersion ?? undefined,
-      osPlatform:
-        reporterOptions?.osPlatform ?? reporterOptions?.osPlatform ?? undefined,
-      osRelease:
-        reporterOptions?.osRelease ?? reporterOptions?.osRelease ?? undefined,
-      osVersion:
-        reporterOptions?.osVersion ?? reporterOptions?.osVersion ?? undefined,
-      buildName:
-        reporterOptions?.buildName ?? reporterOptions?.buildName ?? undefined,
-      buildNumber:
-        reporterOptions?.buildNumber ??
-        reporterOptions?.buildNumber ??
-        undefined,
-      buildUrl:
-        reporterOptions?.buildUrl ?? reporterOptions?.buildUrl ?? undefined,
-      repositoryName:
-        reporterOptions?.repositoryName ??
-        reporterOptions?.repositoryName ??
-        undefined,
-      repositoryUrl:
-        reporterOptions?.repositoryUrl ??
-        reporterOptions?.repositoryUrl ??
-        undefined,
-      branchName:
-        reporterOptions?.branchName ?? reporterOptions?.branchName ?? undefined,
-      testEnvironment:
-        reporterOptions?.testEnvironment ??
-        reporterOptions?.testEnvironment ??
-        undefined,
+      outputFile: normalizedOptions.outputFile ?? this.defaultOutputFile,
+      outputDir: normalizedOptions.outputDir ?? this.defaultOutputDir,
+      minimal: this.parseBoolean(normalizedOptions.minimal ?? 'false'),
+      testType: normalizedOptions.testType,
+      appName: normalizedOptions.appName,
+      appVersion: normalizedOptions.appVersion,
+      osPlatform: normalizedOptions.osPlatform,
+      osRelease: normalizedOptions.osRelease,
+      osVersion: normalizedOptions.osVersion,
+      buildName: normalizedOptions.buildName,
+      buildNumber: normalizedOptions.buildNumber,
+      buildUrl: normalizedOptions.buildUrl,
+      repositoryName: normalizedOptions.repositoryName,
+      repositoryUrl: normalizedOptions.repositoryUrl,
+      branchName: normalizedOptions.branchName,
+      testEnvironment: normalizedOptions.testEnvironment,
     }
 
     this.ctrfReport = {
@@ -189,6 +180,34 @@ class GenerateCtrfReport {
     })
   }
 
+  private normalizeOptions(
+    options: ReporterConfigOptions
+  ): ReporterConfigOptions {
+    const normalized: ReporterConfigOptions = {}
+
+    normalized.outputFile = options.outputFile ?? options.ctrfJsonOutputFile
+    normalized.outputDir = options.outputDir ?? options.ctrfJsonOutputDir
+    normalized.minimal = options.minimal ?? options.ctrfJsonMinimal
+    normalized.testType = options.testType ?? options.ctrfJsonTestType
+    normalized.appName = options.appName ?? options.ctrfJsonAppName
+    normalized.appVersion = options.appVersion ?? options.ctrfJsonAppVersion
+    normalized.osPlatform = options.osPlatform ?? options.ctrfJsonOsPlatform
+    normalized.osRelease = options.osRelease ?? options.ctrfJsonOsRelease
+    normalized.osVersion = options.osVersion ?? options.ctrfJsonOsVersion
+    normalized.buildName = options.buildName ?? options.ctrfJsonBuildName
+    normalized.buildNumber = options.buildNumber ?? options.ctrfJsonBuildNumber
+    normalized.buildUrl = options.buildUrl ?? options.ctrfJsonBuildUrl
+    normalized.repositoryName =
+      options.repositoryName ?? options.ctrfJsonRepositoryName
+    normalized.repositoryUrl =
+      options.repositoryUrl ?? options.ctrfJsonRepositoryUrl
+    normalized.branchName = options.branchName ?? options.ctrfJsonBranchName
+    normalized.testEnvironment =
+      options.testEnvironment ?? options.ctrfJsonTestEnvironment
+
+    return normalized
+  }
+
   private setFilename(filename: string): void {
     if (filename.endsWith('.json')) {
       this.filename = filename
@@ -218,9 +237,6 @@ class GenerateCtrfReport {
     }
     if (reporterConfigOptions.buildNumber !== undefined) {
       this.ctrfEnvironment.buildNumber = reporterConfigOptions.buildNumber
-    }
-    if (reporterConfigOptions.buildUrl !== undefined) {
-      this.ctrfEnvironment.buildUrl = reporterConfigOptions.buildUrl
     }
     if (reporterConfigOptions.buildUrl !== undefined) {
       this.ctrfEnvironment.buildUrl = reporterConfigOptions.buildUrl
