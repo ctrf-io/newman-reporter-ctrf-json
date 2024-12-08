@@ -62,7 +62,6 @@ class GenerateCtrfReport {
   ) {
     this.registerEvents()
     const normalizedOptions = this.normalizeOptions(reporterOptions)
-    console.log('Normalized Options:', JSON.stringify(normalizedOptions))
 
     this.reporterConfigOptions = {
       outputFile: normalizedOptions.outputFile ?? this.defaultOutputFile,
