@@ -151,7 +151,9 @@ class GenerateCtrfReport {
               status:
                 assertion.error != null
                   ? ('failed' as CtrfTestState)
-                  : ('passed' as CtrfTestState),
+                  : assertion.skipped
+                    ? ('skipped' as CtrfTestState)
+                    : ('passed' as CtrfTestState),
               duration: execution.response.responseTime,
             }
 
