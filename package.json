@@ -1,6 +1,6 @@
 {
   "name": "newman-reporter-ctrf-json",
-  "version": "0.0.9",
+  "version": "0.0.10",
   "description": "A Postman Newman JSON test reporter to create test results reports",
   "main": "dist/index.js",
   "scripts": {
@@ -16,6 +16,8 @@
     "README.md"
   ],
   "repository": "github:ctrf-io/newman-reporter-ctrf-json",
+  "homepage": "https://ctrf.io",
+  "keywords": ["newman", "ctrf", "test-reporter", "postman", "test-automation", "test-results", "testing"],
   "author": "Matthew Thomas",
   "license": "MIT",
   "devDependencies": {
