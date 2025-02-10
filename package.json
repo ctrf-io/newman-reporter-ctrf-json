@@ -17,7 +17,15 @@
   ],
   "repository": "github:ctrf-io/newman-reporter-ctrf-json",
   "homepage": "https://ctrf.io",
-  "keywords": ["newman", "ctrf", "test-reporter", "postman", "test-automation", "test-results", "testing"],
+  "keywords": [
+    "newman",
+    "ctrf",
+    "test-reporter",
+    "postman",
+    "test-automation",
+    "test-results",
+    "testing"
+  ],
   "author": "Matthew Thomas",
   "license": "MIT",
   "devDependencies": {
