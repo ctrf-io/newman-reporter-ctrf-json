@@ -143,11 +143,19 @@ class GenerateCtrfReport {
       summary.run.executions.forEach((execution) => {
         // eslint-disable-next-line @typescript-eslint/strict-boolean-expressions
         if (execution.assertions) {
+          const parentNames: string[] = []
+
+          execution.item.forEachParent((parent) => {
+            parentNames.unshift(parent.name)
+          })
+
+          const suiteName = [collectionName, ...parentNames].join(' > ')
+
           execution.assertions.forEach((assertion) => {
             this.ctrfReport.results.summary.tests += 1
 
             const testResult: CtrfTest = {
-              name: assertion.assertion,
+              name: `${execution.item.name}: ${assertion.assertion}`,
               status:
                 assertion.error != null
                   ? ('failed' as CtrfTestState)
@@ -158,7 +166,7 @@ class GenerateCtrfReport {
             }
 
             if (this.reporterConfigOptions.minimal === false) {
-              testResult.suite = `${collectionName} > ${execution.item.name}`
+              testResult.suite = suiteName
               testResult.type = this.reporterConfigOptions.testType
             }
 
