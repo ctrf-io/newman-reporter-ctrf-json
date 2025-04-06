@@ -162,7 +162,7 @@ class GenerateCtrfReport {
                   : assertion.skipped
                     ? ('skipped' as CtrfTestState)
                     : ('passed' as CtrfTestState),
-              duration: execution.response ? execution.response.responseTime : 0,
+              duration: execution.response.responseTime ?? 0,
             }
 
             if (this.reporterConfigOptions.minimal === false) {
