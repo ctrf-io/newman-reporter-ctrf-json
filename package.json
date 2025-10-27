@@ -1,6 +1,6 @@
 {
   "name": "newman-reporter-ctrf-json",
-  "version": "0.0.12",
+  "version": "0.0.13",
   "description": "A Postman Newman JSON test reporter to create test results reports",
   "main": "dist/index.js",
   "scripts": {
@@ -9,13 +9,21 @@
     "lint": "eslint . --ext .ts --fix",
     "lint-check": "eslint . --ext .ts",
     "format": "prettier --write .",
-    "format-check": "prettier --check ."
+    "format-check": "prettier --check .",
+    "all": "npm run lint && npm run format-check && npm run build"
   },
   "files": [
     "dist/",
     "README.md"
   ],
-  "repository": "github:ctrf-io/newman-reporter-ctrf-json",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ctrf-io/newman-reporter-ctrf-json.git"
+  },
+  "publishConfig": {
+    "access": "public",
+    "provenance": true
+  },
   "homepage": "https://ctrf.io",
   "keywords": [
     "newman",
