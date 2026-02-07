@@ -26,13 +26,16 @@
   },
   "homepage": "https://ctrf.io",
   "keywords": [
-    "newman",
     "ctrf",
-    "test-reporter",
-    "postman",
-    "test-automation",
+    "common-test-report-format",
+    "test-reporting",
     "test-results",
-    "testing"
+    "testing",
+    "json",
+    "ci",
+    "newman",
+    "newman-reporter",
+    "postman"
   ],
   "author": "Matthew Poulton-White",
   "license": "MIT",
