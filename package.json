@@ -34,8 +34,12 @@
     "test-results",
     "testing"
   ],
-  "author": "Matthew Thomas",
+  "author": "Matthew Poulton-White",
   "license": "MIT",
+  "security": {
+    "email": "security@ctrf.io",
+    "url": "https://github.com/ctrf-io/.github/blob/main/SECURITY.md"
+  },
   "devDependencies": {
     "@types/newman": "^5.3.5",
     "@types/node": "^20.8.10",
