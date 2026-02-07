@@ -6,6 +6,21 @@ A Postman newman JSON test reporter to create test reports that follow the CTRF 
 
 [Common Test Report Format](https://ctrf.io) ensures the generation of uniform JSON test reports, independent of programming languages or test framework in use.
 
+## CTRF Open Standard
+
+CTRF is a community-driven open standard for test reporting.
+
+By standardizing test results, reports can be validated, merged, compared, and analyzed consistently across languages and frameworks.
+
+- **CTRF Specification**: https://github.com/ctrf-io/ctrf  
+  The official specification defining the format and semantics
+- **Discussions**: https://github.com/orgs/ctrf-io/discussions  
+  Community forum for questions, ideas, and support
+
+> [!NOTE]  
+> ⭐ Starring the **CTRF specification repository** (https://github.com/ctrf-io/ctrf)
+> helps support the standard.
+
 ## Features
 
 - Generate JSON test reports that are [CTRF](https://ctrf.io) compliant
@@ -164,18 +179,3 @@ The test object in the report includes the following [CTRF properties](https://c
 | `trace`    | String | Optional | The stack trace captured if the test failed.                                        |
 | `suite`    | String | Optional | The suite or group to which the test belongs.                                       |
 | `type`     | String | Optional | The type of test (e.g., `api`, `contract`).                                         |
-
-## CTRF Open Standard
-
-CTRF is a community-driven open standard for test reporting.
-
-By standardizing test results, reports can be validated, merged, compared, and analyzed consistently across languages and frameworks.
-
-- **CTRF Specification**: https://github.com/ctrf-io/ctrf  
-  The official specification defining the format and semantics
-- **Discussions**: https://github.com/orgs/ctrf-io/discussions  
-  Community forum for questions, ideas, and support
-
-> [!NOTE]  
-> ⭐ Starring the **CTRF specification repository** (https://github.com/ctrf-io/ctrf)
-> helps support the standard.
