@@ -141,7 +141,6 @@ class GenerateCtrfReport {
         this.setFilename(this.reporterConfigOptions.outputFile)
       }
       summary.run.executions.forEach((execution) => {
-        // eslint-disable-next-line @typescript-eslint/strict-boolean-expressions
         if (execution.assertions) {
           const parentNames: string[] = []
 
