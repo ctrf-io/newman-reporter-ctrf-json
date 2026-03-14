@@ -6,8 +6,8 @@
   "scripts": {
     "build": "tsc",
     "test": "jest",
-    "lint": "eslint . --ext .ts --fix",
-    "lint:check": "eslint . --ext .ts",
+    "lint": "eslint . --fix",
+    "lint:check": "eslint .",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
     "all": "npm run lint && npm run format:check && npm run build"
@@ -44,21 +44,22 @@
     "url": "https://github.com/ctrf-io/.github/blob/main/SECURITY.md"
   },
   "devDependencies": {
+    "@types/jest": "^30.0.0",
     "@types/newman": "^5.3.6",
-    "@types/node": "^20.19.33",
-    "typescript": "^5.9.3",
-    "@typescript-eslint/eslint-plugin": "^6.21.0",
-    "@typescript-eslint/parser": "^6.21.0",
-    "eslint": "^8.57.1",
+    "@types/node": "^25.2.2",
+    "@typescript-eslint/eslint-plugin": "^8.55.0",
+    "@typescript-eslint/parser": "^8.55.0",
+    "eslint": "^9.39.2",
     "eslint-config-prettier": "^10.1.8",
-    "eslint-config-standard-with-typescript": "^40.0.0",
     "eslint-plugin-import": "^2.32.0",
-    "eslint-plugin-n": "^16.6.2",
+    "eslint-plugin-n": "^17.23.2",
     "eslint-plugin-prettier": "^5.5.5",
-    "eslint-plugin-promise": "^6.6.0",
+    "eslint-plugin-promise": "^7.2.1",
     "jest": "^30.2.0",
     "jest-ctrf-json-reporter": "^0.0.10",
     "prettier": "^3.8.1",
-    "ts-jest": "^29.4.6"
+    "ts-jest": "^29.4.6",
+    "typescript": "^5.9.3",
+    "typescript-eslint": "^8.55.0"
   }
 }
