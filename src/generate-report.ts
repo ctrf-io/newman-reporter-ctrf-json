@@ -1,13 +1,29 @@
 import * as fs from 'fs'
 import { type EventEmitter } from 'events'
 import {
-  type CtrfTest,
-  type CtrfEnvironment,
-  type CtrfReport,
-  type CtrfTestState,
-} from '../types/ctrf'
+  type CTRFReport,
+  type Test as CtrfTestBase,
+  type TestStatus,
+  type Environment,
+  type Results,
+} from 'ctrf'
 import { type NewmanRunOptions, type NewmanRunSummary } from 'newman'
 import path = require('path')
+
+// Local overrides to keep backward-compatible string suite (canonical is string[])
+// TODO(v1): align suite to string[] and remove this override
+type NewmanTest = Omit<CtrfTestBase, 'suite'> & { suite?: string | string[] }
+// TODO(v1): align buildNumber to number and remove this override
+type NewmanEnvironment = Omit<Environment, 'buildNumber'> & {
+  buildNumber?: string | number
+}
+type NewmanResults = Omit<Results, 'tests' | 'environment'> & {
+  tests: NewmanTest[]
+  environment?: NewmanEnvironment
+}
+type NewmanCTRFReport = Omit<CTRFReport, 'results'> & {
+  results: NewmanResults
+}
 
 interface ReporterConfigOptions {
   outputFile?: string
@@ -47,8 +63,8 @@ interface ReporterConfigOptions {
 }
 
 class GenerateCtrfReport {
-  readonly ctrfReport: CtrfReport
-  readonly ctrfEnvironment: CtrfEnvironment
+  readonly ctrfReport: NewmanCTRFReport
+  readonly ctrfEnvironment: NewmanEnvironment
   readonly reporterConfigOptions: ReporterConfigOptions
   readonly reporterName = 'newman-reporter-ctrf-json'
   readonly defaultOutputFile = 'ctrf-report.json'
@@ -83,6 +99,9 @@ class GenerateCtrfReport {
     }
 
     this.ctrfReport = {
+      reportFormat: 'CTRF',
+      specVersion: '0.0.0',
+      generatedBy: 'newman-reporter-ctrf-json',
       results: {
         tool: {
           name: 'newman',
@@ -153,14 +172,14 @@ class GenerateCtrfReport {
           execution.assertions.forEach((assertion) => {
             this.ctrfReport.results.summary.tests += 1
 
-            const testResult: CtrfTest = {
+            const testResult: NewmanTest = {
               name: `${execution.item.name}: ${assertion.assertion}`,
               status:
                 assertion.error != null
-                  ? ('failed' as CtrfTestState)
+                  ? ('failed' as TestStatus)
                   : assertion.skipped
-                    ? ('skipped' as CtrfTestState)
-                    : ('passed' as CtrfTestState),
+                    ? ('skipped' as TestStatus)
+                    : ('passed' as TestStatus),
               duration: execution.response?.responseTime ?? 0,
             }
 
@@ -264,11 +283,11 @@ class GenerateCtrfReport {
     }
   }
 
-  hasEnvironmentDetails(environment: CtrfEnvironment): boolean {
+  hasEnvironmentDetails(environment: NewmanEnvironment): boolean {
     return Object.keys(environment).length > 0
   }
 
-  private writeReportToFile(data: CtrfReport): void {
+  private writeReportToFile(data: NewmanCTRFReport): void {
     const filePath = path.join(
       this.reporterConfigOptions.outputDir ?? this.defaultOutputDir,
       this.filename
