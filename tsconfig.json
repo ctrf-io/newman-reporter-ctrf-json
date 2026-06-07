@@ -6,7 +6,8 @@
 		"outDir": "./dist",
 		"rootDir": "./src",
 		"declaration": true,
-		"skipDefaultLibCheck": true
+		"skipDefaultLibCheck": true,
+		"types": ["node", "jest"]
 	},
 	"include": ["src/**/*.ts"]
 }
