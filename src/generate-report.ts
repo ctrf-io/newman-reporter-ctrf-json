@@ -1,5 +1,6 @@
 import * as fs from "node:fs";
 import type { EventEmitter } from "node:events";
+import path from "node:path";
 import type {
 	CTRFReport,
 	Test as CtrfTestBase,
@@ -8,7 +9,6 @@ import type {
 	Results,
 } from "ctrf";
 import type { NewmanRunOptions, NewmanRunSummary } from "newman";
-import path = require("node:path");
 
 // Local overrides to keep backward-compatible string suite (canonical is string[])
 // TODO(v1): align suite to string[] and remove this override
@@ -62,7 +62,7 @@ interface ReporterConfigOptions {
 	ctrfJsonTestEnvironment?: string;
 }
 
-class GenerateCtrfReport {
+export default class GenerateCtrfReport {
 	readonly ctrfReport: NewmanCTRFReport;
 	readonly ctrfEnvironment: NewmanEnvironment;
 	readonly reporterConfigOptions: ReporterConfigOptions;
@@ -311,5 +311,3 @@ class GenerateCtrfReport {
 		return value.toLowerCase() === "true";
 	}
 }
-
-export = GenerateCtrfReport;
