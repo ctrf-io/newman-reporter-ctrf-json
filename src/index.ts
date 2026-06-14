@@ -1,3 +1,3 @@
-import GenerateCtrfReport = require("./generate-report");
+import GenerateCtrfReport from "./generate-report";
 
-export = GenerateCtrfReport;
+export default GenerateCtrfReport;
