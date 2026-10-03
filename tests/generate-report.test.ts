@@ -11,6 +11,7 @@ describe("GenerateCtrfReport", () => {
 				ctrfJsonMinimal: true,
 				ctrfJsonTestType: "api",
 				ctrfJsonBuildName: "build",
+				ctrfJsonBuildNumber: "42",
 			},
 			{} as never,
 		);
@@ -21,6 +22,7 @@ describe("GenerateCtrfReport", () => {
 			minimal: true,
 			testType: "api",
 			buildName: "build",
+			buildNumber: "42",
 		});
 		expect(reporter.filename).toBe("custom-report.json");
 	});
@@ -32,7 +34,7 @@ describe("GenerateCtrfReport", () => {
 			{
 				appName: "api",
 				buildName: "CI",
-				buildNumber: "42",
+				buildNumber: 42,
 			},
 			{} as never,
 		);
@@ -42,7 +44,20 @@ describe("GenerateCtrfReport", () => {
 		expect(reporter.ctrfReport.results.environment).toMatchObject({
 			appName: "api",
 			buildName: "CI",
-			buildNumber: "42",
+			buildNumber: 42,
 		});
+	});
+
+	it("normalizes CLI build numbers to the canonical numeric value", () => {
+		const emitter = new EventEmitter();
+		const reporter = new GenerateCtrfReport(
+			emitter,
+			{ ctrfJsonBuildNumber: "42" },
+			{} as never,
+		);
+
+		emitter.emit("start");
+
+		expect(reporter.ctrfReport.results.environment?.buildNumber).toBe(42);
 	});
 });

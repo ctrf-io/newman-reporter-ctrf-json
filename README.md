@@ -2,6 +2,8 @@
 
 > Save Newman Postman test results as a JSON file
 
+![CTRF 0.1.0](https://img.shields.io/badge/0.1.0-red?label=ctrf&labelColor=green)
+
 A Postman newman JSON test reporter to create test reports that follow the CTRF standard.
 
 [Common Test Report Format](https://ctrf.io) ensures the generation of uniform JSON test reports, independent of programming languages or test framework in use.
@@ -52,7 +54,7 @@ By standardizing test results, reports can be validated, merged, compared, and a
     "environment": {
       "appName": "MyApp",
       "buildName": "MyBuild",
-      "buildNumber": "1"
+      "buildNumber": 1
     }
   }
 }
@@ -148,7 +150,7 @@ newman.run(
         osRelease: '18.04',
         osVersion: '5.4.0',
         buildName: 'MyApp',
-        buildNumber: '100',
+        buildNumber: 100,
         buildUrl: 'https://ctrf.io',
         repositoryName: 'ctrf',
         repositoryUrl: 'https://github.com/ctrf-io/newman-reporter-ctrf-json',
