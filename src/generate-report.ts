@@ -1,29 +1,14 @@
 import * as fs from "node:fs";
 import type { EventEmitter } from "node:events";
 import path from "node:path";
-import type {
-	CTRFReport,
-	Test as CtrfTestBase,
-	TestStatus,
-	Environment,
-	Results,
+import {
+	CURRENT_SPEC_VERSION,
+	type CTRFReport,
+	type Test as NewmanTest,
+	type TestStatus,
+	type Environment,
 } from "ctrf";
 import type { NewmanRunOptions, NewmanRunSummary } from "newman";
-
-// Local overrides to keep backward-compatible string suite (canonical is string[])
-// TODO(v1): align suite to string[] and remove this override
-type NewmanTest = Omit<CtrfTestBase, "suite"> & { suite?: string | string[] };
-// TODO(v1): align buildNumber to number and remove this override
-type NewmanEnvironment = Omit<Environment, "buildNumber"> & {
-	buildNumber?: string | number;
-};
-type NewmanResults = Omit<Results, "tests" | "environment"> & {
-	tests: NewmanTest[];
-	environment?: NewmanEnvironment;
-};
-type NewmanCTRFReport = Omit<CTRFReport, "results"> & {
-	results: NewmanResults;
-};
 
 interface ReporterConfigOptions {
 	outputFile?: string;
@@ -36,7 +21,7 @@ interface ReporterConfigOptions {
 	osRelease?: string;
 	osVersion?: string;
 	buildName?: string;
-	buildNumber?: string;
+	buildNumber?: string | number;
 	buildUrl?: string;
 	repositoryName?: string;
 	repositoryUrl?: string;
@@ -54,7 +39,7 @@ interface ReporterConfigOptions {
 	ctrfJsonOsRelease?: string;
 	ctrfJsonOsVersion?: string;
 	ctrfJsonBuildName?: string;
-	ctrfJsonBuildNumber?: string;
+	ctrfJsonBuildNumber?: string | number;
 	ctrfJsonBuildUrl?: string;
 	ctrfJsonRepositoryName?: string;
 	ctrfJsonRepositoryUrl?: string;
@@ -63,8 +48,8 @@ interface ReporterConfigOptions {
 }
 
 export default class GenerateCtrfReport {
-	readonly ctrfReport: NewmanCTRFReport;
-	readonly ctrfEnvironment: NewmanEnvironment;
+	readonly ctrfReport: CTRFReport;
+	readonly ctrfEnvironment: Environment;
 	readonly reporterConfigOptions: ReporterConfigOptions;
 	readonly reporterName = "newman-reporter-ctrf-json";
 	readonly defaultOutputFile = "ctrf-report.json";
@@ -100,7 +85,7 @@ export default class GenerateCtrfReport {
 
 		this.ctrfReport = {
 			reportFormat: "CTRF",
-			specVersion: "0.0.0",
+			specVersion: CURRENT_SPEC_VERSION,
 			generatedBy: "newman-reporter-ctrf-json",
 			results: {
 				tool: {
@@ -167,7 +152,7 @@ export default class GenerateCtrfReport {
 						parentNames.unshift(parent.name);
 					});
 
-					const suiteName = [collectionName, ...parentNames].join(" > ");
+					const suite = [collectionName, ...parentNames];
 
 					execution.assertions.forEach((assertion) => {
 						this.ctrfReport.results.summary.tests += 1;
@@ -184,7 +169,7 @@ export default class GenerateCtrfReport {
 						};
 
 						if (this.reporterConfigOptions.minimal === false) {
-							testResult.suite = suiteName;
+							testResult.suite = suite;
 							testResult.type = this.reporterConfigOptions.testType;
 						}
 
@@ -263,7 +248,10 @@ export default class GenerateCtrfReport {
 			this.ctrfEnvironment.buildName = reporterConfigOptions.buildName;
 		}
 		if (reporterConfigOptions.buildNumber !== undefined) {
-			this.ctrfEnvironment.buildNumber = reporterConfigOptions.buildNumber;
+			const buildNumber = Number(reporterConfigOptions.buildNumber);
+			if (Number.isInteger(buildNumber)) {
+				this.ctrfEnvironment.buildNumber = buildNumber;
+			}
 		}
 		if (reporterConfigOptions.buildUrl !== undefined) {
 			this.ctrfEnvironment.buildUrl = reporterConfigOptions.buildUrl;
@@ -284,11 +272,11 @@ export default class GenerateCtrfReport {
 		}
 	}
 
-	hasEnvironmentDetails(environment: NewmanEnvironment): boolean {
+	hasEnvironmentDetails(environment: Environment): boolean {
 		return Object.keys(environment).length > 0;
 	}
 
-	private writeReportToFile(data: NewmanCTRFReport): void {
+	private writeReportToFile(data: CTRFReport): void {
 		const filePath = path.join(
 			this.reporterConfigOptions.outputDir ?? this.defaultOutputDir,
 			this.filename,

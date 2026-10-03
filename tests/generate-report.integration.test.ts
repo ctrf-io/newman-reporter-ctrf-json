@@ -2,7 +2,7 @@ import { EventEmitter } from "node:events";
 import fs from "node:fs";
 import os from "node:os";
 import path from "node:path";
-import { parse } from "ctrf";
+import { parse, validateStrict } from "ctrf";
 import GenerateCtrfReport from "../src/generate-report";
 
 const createSummary = () => ({
@@ -56,7 +56,7 @@ describe("GenerateCtrfReport integration", () => {
 				outputFile: "ctrf-report.json",
 				testType: "api",
 				buildName: "CI",
-				buildNumber: "42",
+				buildNumber: 42,
 			},
 			{} as never,
 		);
@@ -66,6 +66,7 @@ describe("GenerateCtrfReport integration", () => {
 
 		const reportPath = path.join(outputDir, "ctrf-report.json");
 		const report = parse(fs.readFileSync(reportPath, "utf8"));
+		expect(() => validateStrict(report)).not.toThrow();
 
 		expect(report.reportFormat).toBe("CTRF");
 		expect(report.results.summary).toMatchObject({
@@ -80,7 +81,7 @@ describe("GenerateCtrfReport integration", () => {
 					name: "Get users: status is 200",
 					status: "passed",
 					duration: 123,
-					suite: "Postman collection > Users",
+					suite: ["Postman collection", "Users"],
 					type: "api",
 				}),
 				expect.objectContaining({
