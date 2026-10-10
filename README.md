@@ -2,7 +2,7 @@
 
 > Save Newman Postman test results as a JSON file
 
-![CTRF 0.1.0](https://img.shields.io/badge/0.1.0-red?label=ctrf&labelColor=green)
+![CTRF 0.2.0](https://img.shields.io/badge/0.1.0-red?label=ctrf&labelColor=green)
 
 A Postman newman JSON test reporter to create test reports that follow the CTRF standard.
 
@@ -181,3 +181,13 @@ The test object in the report includes the following [CTRF properties](https://c
 | `trace`    | String | Optional | The stack trace captured if the test failed.                                        |
 | `suite`    | String | Optional | The suite or group to which the test belongs.                                       |
 | `type`     | String | Optional | The type of test (e.g., `api`, `contract`).                                         |
+
+## Identity and lineage
+
+Reports include a UUID `reportId` for the emitted document, `runId` for the logical run, a stable `testId` for each logical test, and an `executionId` for each execution lifecycle. Retry history entries have distinct `attemptId` values; the final attempt is represented by the test result itself. Display names and runtime `extra` metadata remain independent of identity. Identity is included in minimal output.
+
+Set reporter options `runId` and `shardId` to coordinate distributed runs: all shards of one run should share the same non-empty `runId` and have distinct `shardId` values. Otherwise a standalone run ID is generated. Generic identity values are opaque strings, not necessarily UUIDs.
+
+Where the framework does not provide a stable logical identifier, IDs are derived from the available file, suite, test name and variant. For custom stability requirements, set `testIdResolver: (test) => "your-stable-id"`; its input exposes `name`, optional `filePath`, `suite` and `variant`. Choose an ID stable across runs and unique within your test namespace. Renaming or moving a test can change the default ID.
+
+Newman CLI options are `--reporter-ctrf-json-run-id` and `--reporter-ctrf-json-shard-id`. Repeated iterations share logical test IDs and receive distinct execution IDs.

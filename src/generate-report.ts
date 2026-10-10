@@ -1,3 +1,10 @@
+import {
+	identityValue,
+	runIdentity,
+	testIdentity,
+	type IdentityOptions,
+} from "./identity";
+import { randomUUID } from "node:crypto";
 import * as fs from "node:fs";
 import type { EventEmitter } from "node:events";
 import path from "node:path";
@@ -10,7 +17,7 @@ import {
 } from "ctrf";
 import type { NewmanRunOptions, NewmanRunSummary } from "newman";
 
-interface ReporterConfigOptions {
+interface ReporterConfigOptions extends IdentityOptions {
 	outputFile?: string;
 	outputDir?: string;
 	minimal?: boolean;
@@ -28,6 +35,8 @@ interface ReporterConfigOptions {
 	branchName?: string;
 	testEnvironment?: string;
 
+	ctrfJsonRunId?: string;
+	ctrfJsonShardId?: string;
 	// CLI-prefixed options
 	ctrfJsonOutputFile?: string;
 	ctrfJsonOutputDir?: string;
@@ -65,6 +74,9 @@ export default class GenerateCtrfReport {
 		const normalizedOptions = this.normalizeOptions(reporterOptions);
 
 		this.reporterConfigOptions = {
+			runId: normalizedOptions?.runId,
+			shardId: identityValue(normalizedOptions?.shardId, "shardId"),
+			testIdResolver: normalizedOptions?.testIdResolver,
 			outputFile: normalizedOptions.outputFile ?? this.defaultOutputFile,
 			outputDir: normalizedOptions.outputDir ?? this.defaultOutputDir,
 			minimal: this.parseBoolean(normalizedOptions.minimal ?? "false"),
@@ -85,7 +97,9 @@ export default class GenerateCtrfReport {
 
 		this.ctrfReport = {
 			reportFormat: "CTRF",
+			runId: runIdentity(this.reporterConfigOptions.runId),
 			specVersion: CURRENT_SPEC_VERSION,
+			reportId: randomUUID(),
 			generatedBy: "newman-reporter-ctrf-json",
 			results: {
 				tool: {
@@ -158,6 +172,16 @@ export default class GenerateCtrfReport {
 						this.ctrfReport.results.summary.tests += 1;
 
 						const testResult: NewmanTest = {
+							testId: testIdentity(
+								"newman",
+								{
+									name: assertion.assertion,
+									suite: [...suite, execution.item.name],
+									variant: `${summary.collection.id ?? ""}/${execution.item.id ?? ""}`,
+								},
+								this.reporterConfigOptions,
+							),
+							executionId: randomUUID(),
 							name: `${execution.item.name}: ${assertion.assertion}`,
 							status:
 								assertion.error != null
@@ -196,6 +220,9 @@ export default class GenerateCtrfReport {
 		options: ReporterConfigOptions,
 	): ReporterConfigOptions {
 		const normalized: ReporterConfigOptions = {};
+		normalized.runId = options.runId ?? options.ctrfJsonRunId;
+		normalized.shardId = options.shardId ?? options.ctrfJsonShardId;
+		normalized.testIdResolver = options.testIdResolver;
 
 		normalized.outputFile = options.outputFile ?? options.ctrfJsonOutputFile;
 		normalized.outputDir = options.outputDir ?? options.ctrfJsonOutputDir;
@@ -229,6 +256,11 @@ export default class GenerateCtrfReport {
 	}
 
 	setEnvironmentDetails(reporterConfigOptions: ReporterConfigOptions): void {
+		if (reporterConfigOptions.shardId !== undefined)
+			this.ctrfEnvironment.shardId = identityValue(
+				reporterConfigOptions.shardId,
+				"shardId",
+			);
 		if (reporterConfigOptions.appName !== undefined) {
 			this.ctrfEnvironment.appName = reporterConfigOptions.appName;
 		}
