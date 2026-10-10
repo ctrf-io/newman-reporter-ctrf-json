@@ -1,9 +1,4 @@
-import {
-	identityValue,
-	runIdentity,
-	testIdentity,
-	type IdentityOptions,
-} from "./identity";
+import { identityValue, testIdentity, type IdentityOptions } from "./identity";
 import { randomUUID } from "node:crypto";
 import * as fs from "node:fs";
 import type { EventEmitter } from "node:events";
@@ -97,7 +92,7 @@ export default class GenerateCtrfReport {
 
 		this.ctrfReport = {
 			reportFormat: "CTRF",
-			runId: runIdentity(this.reporterConfigOptions.runId),
+			runId: this.reporterConfigOptions.runId || undefined,
 			specVersion: CURRENT_SPEC_VERSION,
 			reportId: randomUUID(),
 			generatedBy: "newman-reporter-ctrf-json",
