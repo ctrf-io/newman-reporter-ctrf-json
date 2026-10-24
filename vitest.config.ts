@@ -4,7 +4,8 @@ export default defineConfig({
 	test: {
 		environment: "node",
 		globals: true,
-		reporters: ["default", "@d2t/vitest-ctrf-json-reporter"],
+		include: ["tests/**/*.test.ts"],
+		reporters: ["default", "./tests/reporters/vitest.mjs"],
 		coverage: {
 			provider: "v8",
 			reporter: ["text", "json", "lcov"],
