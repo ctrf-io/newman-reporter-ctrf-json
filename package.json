@@ -27,7 +27,12 @@
 		"format": "biome format --write .",
 		"format:check": "biome format .",
 		"all": "npm run build:check && npm run lint:check && npm run format:check && npm run test:coverage && npm run test:integration && npm run build",
-		"check": "biome check ."
+		"check": "biome check .",
+		"test:standard:checker": "node tests/standard/checker/run.mjs",
+		"test:standard:conformance:unit": "npm run build && node tests/standard/conformance/run.mjs unit",
+		"test:standard:conformance:integration": "npm run build && node tests/standard/conformance/run.mjs integration",
+		"test:standard:conformance": "node tests/standard/conformance/run-all.mjs",
+		"test:standard": "node tests/standard/run-all.mjs"
 	},
 	"files": [
 		"dist/",
@@ -69,7 +74,10 @@
 		"tsup": "8.5.1",
 		"typescript": "npm:@typescript/typescript6@6.0.2",
 		"vitest": "5.0.3",
-		"@typescript/native": "npm:typescript@7.0.2"
+		"@typescript/native": "npm:typescript@7.0.2",
+		"newman": "6.2.3",
+		"ajv": "8.20.0",
+		"ajv-formats": "3.0.1"
 	},
 	"dependencies": {
 		"ctrf": "0.5.0"

@@ -1,0 +1,749 @@
+{
+	"reporter": "newman",
+	"specVersion": "0.2.0",
+	"sourceRevision": "jest-ctrf-json-reporter@a067e6d94f172db0636c4bd1d9c3706cafae2b48",
+	"properties": {
+		"reportFormat": {
+			"supported": true,
+			"reason": "Emitted by the Newman reporter from native run data or configuration"
+		},
+		"specVersion": {
+			"supported": true,
+			"reason": "Emitted by the Newman reporter from native run data or configuration"
+		},
+		"reportId": {
+			"supported": true,
+			"reason": "Emitted by the Newman reporter from native run data or configuration"
+		},
+		"runId": {
+			"supported": true,
+			"reason": "Emitted by the Newman reporter from native run data or configuration"
+		},
+		"timestamp": {
+			"supported": false,
+			"reason": "The Newman reporter does not emit this optional property"
+		},
+		"generatedBy": {
+			"supported": true,
+			"reason": "Emitted by the Newman reporter from native run data or configuration"
+		},
+		"extra": {
+			"supported": false,
+			"reason": "The Newman reporter does not emit this optional property"
+		},
+		"results": {
+			"supported": true,
+			"reason": "Emitted by the Newman reporter from native run data or configuration"
+		},
+		"results.tool": {
+			"supported": true,
+			"reason": "Emitted by the Newman reporter from native run data or configuration"
+		},
+		"results.tool.name": {
+			"supported": true,
+			"reason": "Emitted by the Newman reporter from native run data or configuration"
+		},
+		"results.tool.version": {
+			"supported": false,
+			"reason": "The Newman reporter does not emit this optional property"
+		},
+		"results.tool.extra": {
+			"supported": false,
+			"reason": "The Newman reporter does not emit this optional property"
+		},
+		"results.summary": {
+			"supported": true,
+			"reason": "Emitted by the Newman reporter from native run data or configuration"
+		},
+		"results.summary.tests": {
+			"supported": true,
+			"reason": "Emitted by the Newman reporter from native run data or configuration"
+		},
+		"results.summary.passed": {
+			"supported": true,
+			"reason": "Emitted by the Newman reporter from native run data or configuration"
+		},
+		"results.summary.failed": {
+			"supported": true,
+			"reason": "Emitted by the Newman reporter from native run data or configuration"
+		},
+		"results.summary.skipped": {
+			"supported": true,
+			"reason": "Emitted by the Newman reporter from native run data or configuration"
+		},
+		"results.summary.pending": {
+			"supported": true,
+			"reason": "Emitted by the Newman reporter from native run data or configuration"
+		},
+		"results.summary.other": {
+			"supported": true,
+			"reason": "Emitted by the Newman reporter from native run data or configuration"
+		},
+		"results.summary.flaky": {
+			"supported": false,
+			"reason": "The Newman reporter does not emit this optional property"
+		},
+		"results.summary.suites": {
+			"supported": false,
+			"reason": "The Newman reporter does not emit this optional property"
+		},
+		"results.summary.start": {
+			"supported": true,
+			"reason": "Emitted by the Newman reporter from native run data or configuration"
+		},
+		"results.summary.stop": {
+			"supported": true,
+			"reason": "Emitted by the Newman reporter from native run data or configuration"
+		},
+		"results.summary.duration": {
+			"supported": false,
+			"reason": "The Newman reporter does not emit this optional property"
+		},
+		"results.summary.extra": {
+			"supported": false,
+			"reason": "The Newman reporter does not emit this optional property"
+		},
+		"results.tests": {
+			"supported": true,
+			"reason": "Emitted by the Newman reporter from native run data or configuration"
+		},
+		"results.tests[].id": {
+			"supported": false,
+			"reason": "The Newman reporter does not emit this optional property"
+		},
+		"results.tests[].testId": {
+			"supported": true,
+			"reason": "Emitted by the Newman reporter from native run data or configuration"
+		},
+		"results.tests[].executionId": {
+			"supported": true,
+			"reason": "Emitted by the Newman reporter from native run data or configuration"
+		},
+		"results.tests[].attemptId": {
+			"supported": false,
+			"reason": "The Newman reporter does not emit this optional property"
+		},
+		"results.tests[].name": {
+			"supported": true,
+			"reason": "Emitted by the Newman reporter from native run data or configuration"
+		},
+		"results.tests[].status": {
+			"supported": true,
+			"reason": "Emitted by the Newman reporter from native run data or configuration"
+		},
+		"results.tests[].duration": {
+			"supported": true,
+			"reason": "Emitted by the Newman reporter from native run data or configuration"
+		},
+		"results.tests[].start": {
+			"supported": false,
+			"reason": "The Newman reporter does not emit this optional property"
+		},
+		"results.tests[].stop": {
+			"supported": false,
+			"reason": "The Newman reporter does not emit this optional property"
+		},
+		"results.tests[].suite": {
+			"supported": true,
+			"reason": "Emitted by the Newman reporter from native run data or configuration"
+		},
+		"results.tests[].message": {
+			"supported": true,
+			"reason": "Emitted by the Newman reporter from native run data or configuration"
+		},
+		"results.tests[].trace": {
+			"supported": true,
+			"reason": "Emitted by the Newman reporter from native run data or configuration"
+		},
+		"results.tests[].snippet": {
+			"supported": false,
+			"reason": "The Newman reporter does not emit this optional property"
+		},
+		"results.tests[].ai": {
+			"supported": false,
+			"reason": "The Newman reporter does not emit this optional property"
+		},
+		"results.tests[].line": {
+			"supported": false,
+			"reason": "The Newman reporter does not emit this optional property"
+		},
+		"results.tests[].rawStatus": {
+			"supported": false,
+			"reason": "The Newman reporter does not emit this optional property"
+		},
+		"results.tests[].tags": {
+			"supported": false,
+			"reason": "The Newman reporter does not emit this optional property"
+		},
+		"results.tests[].labels": {
+			"supported": false,
+			"reason": "The Newman reporter does not emit this optional property"
+		},
+		"results.tests[].type": {
+			"supported": true,
+			"reason": "Emitted by the Newman reporter from native run data or configuration"
+		},
+		"results.tests[].filePath": {
+			"supported": false,
+			"reason": "The Newman reporter does not emit this optional property"
+		},
+		"results.tests[].retries": {
+			"supported": false,
+			"reason": "The Newman reporter does not emit this optional property"
+		},
+		"results.tests[].retryAttempts": {
+			"supported": false,
+			"reason": "The Newman reporter does not emit this optional property"
+		},
+		"results.tests[].retryAttempts[].attempt": {
+			"supported": false,
+			"reason": "The Newman reporter does not emit this optional property"
+		},
+		"results.tests[].retryAttempts[].attemptId": {
+			"supported": false,
+			"reason": "The Newman reporter does not emit this optional property"
+		},
+		"results.tests[].retryAttempts[].status": {
+			"supported": false,
+			"reason": "The Newman reporter does not emit this optional property"
+		},
+		"results.tests[].retryAttempts[].duration": {
+			"supported": false,
+			"reason": "The Newman reporter does not emit this optional property"
+		},
+		"results.tests[].retryAttempts[].message": {
+			"supported": false,
+			"reason": "The Newman reporter does not emit this optional property"
+		},
+		"results.tests[].retryAttempts[].trace": {
+			"supported": false,
+			"reason": "The Newman reporter does not emit this optional property"
+		},
+		"results.tests[].retryAttempts[].line": {
+			"supported": false,
+			"reason": "The Newman reporter does not emit this optional property"
+		},
+		"results.tests[].retryAttempts[].snippet": {
+			"supported": false,
+			"reason": "The Newman reporter does not emit this optional property"
+		},
+		"results.tests[].retryAttempts[].stdout": {
+			"supported": false,
+			"reason": "The Newman reporter does not emit this optional property"
+		},
+		"results.tests[].retryAttempts[].stderr": {
+			"supported": false,
+			"reason": "The Newman reporter does not emit this optional property"
+		},
+		"results.tests[].retryAttempts[].start": {
+			"supported": false,
+			"reason": "The Newman reporter does not emit this optional property"
+		},
+		"results.tests[].retryAttempts[].stop": {
+			"supported": false,
+			"reason": "The Newman reporter does not emit this optional property"
+		},
+		"results.tests[].retryAttempts[].attachments": {
+			"supported": false,
+			"reason": "The Newman reporter does not emit this optional property"
+		},
+		"results.tests[].retryAttempts[].attachments[].attachmentId": {
+			"supported": false,
+			"reason": "The Newman reporter does not emit this optional property"
+		},
+		"results.tests[].retryAttempts[].attachments[].name": {
+			"supported": false,
+			"reason": "The Newman reporter does not emit this optional property"
+		},
+		"results.tests[].retryAttempts[].attachments[].contentType": {
+			"supported": false,
+			"reason": "The Newman reporter does not emit this optional property"
+		},
+		"results.tests[].retryAttempts[].attachments[].path": {
+			"supported": false,
+			"reason": "The Newman reporter does not emit this optional property"
+		},
+		"results.tests[].retryAttempts[].attachments[].extra": {
+			"supported": false,
+			"reason": "The Newman reporter does not emit this optional property"
+		},
+		"results.tests[].retryAttempts[].extra": {
+			"supported": false,
+			"reason": "The Newman reporter does not emit this optional property"
+		},
+		"results.tests[].flaky": {
+			"supported": false,
+			"reason": "The Newman reporter does not emit this optional property"
+		},
+		"results.tests[].stdout": {
+			"supported": false,
+			"reason": "The Newman reporter does not emit this optional property"
+		},
+		"results.tests[].stderr": {
+			"supported": false,
+			"reason": "The Newman reporter does not emit this optional property"
+		},
+		"results.tests[].threadId": {
+			"supported": false,
+			"reason": "The Newman reporter does not emit this optional property"
+		},
+		"results.tests[].browser": {
+			"supported": false,
+			"reason": "The Newman reporter does not emit this optional property"
+		},
+		"results.tests[].device": {
+			"supported": false,
+			"reason": "The Newman reporter does not emit this optional property"
+		},
+		"results.tests[].screenshot": {
+			"supported": false,
+			"reason": "The Newman reporter does not emit this optional property"
+		},
+		"results.tests[].attachments": {
+			"supported": false,
+			"reason": "The Newman reporter does not emit this optional property"
+		},
+		"results.tests[].attachments[].attachmentId": {
+			"supported": false,
+			"reason": "The Newman reporter does not emit this optional property"
+		},
+		"results.tests[].attachments[].name": {
+			"supported": false,
+			"reason": "The Newman reporter does not emit this optional property"
+		},
+		"results.tests[].attachments[].contentType": {
+			"supported": false,
+			"reason": "The Newman reporter does not emit this optional property"
+		},
+		"results.tests[].attachments[].path": {
+			"supported": false,
+			"reason": "The Newman reporter does not emit this optional property"
+		},
+		"results.tests[].attachments[].extra": {
+			"supported": false,
+			"reason": "The Newman reporter does not emit this optional property"
+		},
+		"results.tests[].parameters": {
+			"supported": false,
+			"reason": "The Newman reporter does not emit this optional property"
+		},
+		"results.tests[].steps": {
+			"supported": false,
+			"reason": "The Newman reporter does not emit this optional property"
+		},
+		"results.tests[].steps[].name": {
+			"supported": false,
+			"reason": "The Newman reporter does not emit this optional property"
+		},
+		"results.tests[].steps[].status": {
+			"supported": false,
+			"reason": "The Newman reporter does not emit this optional property"
+		},
+		"results.tests[].steps[].extra": {
+			"supported": false,
+			"reason": "The Newman reporter does not emit this optional property"
+		},
+		"results.tests[].insights": {
+			"supported": false,
+			"reason": "The Newman reporter does not emit this optional property"
+		},
+		"results.tests[].insights.passRate": {
+			"supported": false,
+			"reason": "The Newman reporter does not emit this optional property"
+		},
+		"results.tests[].insights.passRate.current": {
+			"supported": false,
+			"reason": "The Newman reporter does not emit this optional property"
+		},
+		"results.tests[].insights.passRate.baseline": {
+			"supported": false,
+			"reason": "The Newman reporter does not emit this optional property"
+		},
+		"results.tests[].insights.passRate.change": {
+			"supported": false,
+			"reason": "The Newman reporter does not emit this optional property"
+		},
+		"results.tests[].insights.failRate": {
+			"supported": false,
+			"reason": "The Newman reporter does not emit this optional property"
+		},
+		"results.tests[].insights.failRate.current": {
+			"supported": false,
+			"reason": "The Newman reporter does not emit this optional property"
+		},
+		"results.tests[].insights.failRate.baseline": {
+			"supported": false,
+			"reason": "The Newman reporter does not emit this optional property"
+		},
+		"results.tests[].insights.failRate.change": {
+			"supported": false,
+			"reason": "The Newman reporter does not emit this optional property"
+		},
+		"results.tests[].insights.flakyRate": {
+			"supported": false,
+			"reason": "The Newman reporter does not emit this optional property"
+		},
+		"results.tests[].insights.flakyRate.current": {
+			"supported": false,
+			"reason": "The Newman reporter does not emit this optional property"
+		},
+		"results.tests[].insights.flakyRate.baseline": {
+			"supported": false,
+			"reason": "The Newman reporter does not emit this optional property"
+		},
+		"results.tests[].insights.flakyRate.change": {
+			"supported": false,
+			"reason": "The Newman reporter does not emit this optional property"
+		},
+		"results.tests[].insights.averageTestDuration": {
+			"supported": false,
+			"reason": "The Newman reporter does not emit this optional property"
+		},
+		"results.tests[].insights.averageTestDuration.current": {
+			"supported": false,
+			"reason": "The Newman reporter does not emit this optional property"
+		},
+		"results.tests[].insights.averageTestDuration.baseline": {
+			"supported": false,
+			"reason": "The Newman reporter does not emit this optional property"
+		},
+		"results.tests[].insights.averageTestDuration.change": {
+			"supported": false,
+			"reason": "The Newman reporter does not emit this optional property"
+		},
+		"results.tests[].insights.p95TestDuration": {
+			"supported": false,
+			"reason": "The Newman reporter does not emit this optional property"
+		},
+		"results.tests[].insights.p95TestDuration.current": {
+			"supported": false,
+			"reason": "The Newman reporter does not emit this optional property"
+		},
+		"results.tests[].insights.p95TestDuration.baseline": {
+			"supported": false,
+			"reason": "The Newman reporter does not emit this optional property"
+		},
+		"results.tests[].insights.p95TestDuration.change": {
+			"supported": false,
+			"reason": "The Newman reporter does not emit this optional property"
+		},
+		"results.tests[].insights.executedInRuns": {
+			"supported": false,
+			"reason": "The Newman reporter does not emit this optional property"
+		},
+		"results.tests[].insights.extra": {
+			"supported": false,
+			"reason": "The Newman reporter does not emit this optional property"
+		},
+		"results.tests[].extra": {
+			"supported": false,
+			"reason": "The Newman reporter does not emit this optional property"
+		},
+		"results.environment": {
+			"supported": true,
+			"reason": "Emitted by the Newman reporter from native run data or configuration"
+		},
+		"results.environment.reportName": {
+			"supported": false,
+			"reason": "The Newman reporter does not emit this optional property"
+		},
+		"results.environment.appName": {
+			"supported": true,
+			"reason": "Emitted by the Newman reporter from native run data or configuration"
+		},
+		"results.environment.appVersion": {
+			"supported": true,
+			"reason": "Emitted by the Newman reporter from native run data or configuration"
+		},
+		"results.environment.buildId": {
+			"supported": false,
+			"reason": "The Newman reporter does not emit this optional property"
+		},
+		"results.environment.buildName": {
+			"supported": true,
+			"reason": "Emitted by the Newman reporter from native run data or configuration"
+		},
+		"results.environment.buildNumber": {
+			"supported": true,
+			"reason": "Emitted by the Newman reporter from native run data or configuration"
+		},
+		"results.environment.buildUrl": {
+			"supported": true,
+			"reason": "Emitted by the Newman reporter from native run data or configuration"
+		},
+		"results.environment.repositoryName": {
+			"supported": true,
+			"reason": "Emitted by the Newman reporter from native run data or configuration"
+		},
+		"results.environment.repositoryUrl": {
+			"supported": true,
+			"reason": "Emitted by the Newman reporter from native run data or configuration"
+		},
+		"results.environment.commit": {
+			"supported": false,
+			"reason": "The Newman reporter does not emit this optional property"
+		},
+		"results.environment.branchName": {
+			"supported": true,
+			"reason": "Emitted by the Newman reporter from native run data or configuration"
+		},
+		"results.environment.osPlatform": {
+			"supported": true,
+			"reason": "Emitted by the Newman reporter from native run data or configuration"
+		},
+		"results.environment.osRelease": {
+			"supported": true,
+			"reason": "Emitted by the Newman reporter from native run data or configuration"
+		},
+		"results.environment.osVersion": {
+			"supported": true,
+			"reason": "Emitted by the Newman reporter from native run data or configuration"
+		},
+		"results.environment.testEnvironment": {
+			"supported": true,
+			"reason": "Emitted by the Newman reporter from native run data or configuration"
+		},
+		"results.environment.shardId": {
+			"supported": true,
+			"reason": "Emitted by the Newman reporter from native run data or configuration"
+		},
+		"results.environment.healthy": {
+			"supported": false,
+			"reason": "The Newman reporter does not emit this optional property"
+		},
+		"results.environment.extra": {
+			"supported": false,
+			"reason": "The Newman reporter does not emit this optional property"
+		},
+		"results.extra": {
+			"supported": false,
+			"reason": "The Newman reporter does not emit this optional property"
+		},
+		"insights": {
+			"supported": false,
+			"reason": "The Newman reporter does not emit this optional property"
+		},
+		"insights.passRate": {
+			"supported": false,
+			"reason": "The Newman reporter does not emit this optional property"
+		},
+		"insights.passRate.current": {
+			"supported": false,
+			"reason": "The Newman reporter does not emit this optional property"
+		},
+		"insights.passRate.baseline": {
+			"supported": false,
+			"reason": "The Newman reporter does not emit this optional property"
+		},
+		"insights.passRate.change": {
+			"supported": false,
+			"reason": "The Newman reporter does not emit this optional property"
+		},
+		"insights.failRate": {
+			"supported": false,
+			"reason": "The Newman reporter does not emit this optional property"
+		},
+		"insights.failRate.current": {
+			"supported": false,
+			"reason": "The Newman reporter does not emit this optional property"
+		},
+		"insights.failRate.baseline": {
+			"supported": false,
+			"reason": "The Newman reporter does not emit this optional property"
+		},
+		"insights.failRate.change": {
+			"supported": false,
+			"reason": "The Newman reporter does not emit this optional property"
+		},
+		"insights.flakyRate": {
+			"supported": false,
+			"reason": "The Newman reporter does not emit this optional property"
+		},
+		"insights.flakyRate.current": {
+			"supported": false,
+			"reason": "The Newman reporter does not emit this optional property"
+		},
+		"insights.flakyRate.baseline": {
+			"supported": false,
+			"reason": "The Newman reporter does not emit this optional property"
+		},
+		"insights.flakyRate.change": {
+			"supported": false,
+			"reason": "The Newman reporter does not emit this optional property"
+		},
+		"insights.averageRunDuration": {
+			"supported": false,
+			"reason": "The Newman reporter does not emit this optional property"
+		},
+		"insights.averageRunDuration.current": {
+			"supported": false,
+			"reason": "The Newman reporter does not emit this optional property"
+		},
+		"insights.averageRunDuration.baseline": {
+			"supported": false,
+			"reason": "The Newman reporter does not emit this optional property"
+		},
+		"insights.averageRunDuration.change": {
+			"supported": false,
+			"reason": "The Newman reporter does not emit this optional property"
+		},
+		"insights.p95RunDuration": {
+			"supported": false,
+			"reason": "The Newman reporter does not emit this optional property"
+		},
+		"insights.p95RunDuration.current": {
+			"supported": false,
+			"reason": "The Newman reporter does not emit this optional property"
+		},
+		"insights.p95RunDuration.baseline": {
+			"supported": false,
+			"reason": "The Newman reporter does not emit this optional property"
+		},
+		"insights.p95RunDuration.change": {
+			"supported": false,
+			"reason": "The Newman reporter does not emit this optional property"
+		},
+		"insights.averageTestDuration": {
+			"supported": false,
+			"reason": "The Newman reporter does not emit this optional property"
+		},
+		"insights.averageTestDuration.current": {
+			"supported": false,
+			"reason": "The Newman reporter does not emit this optional property"
+		},
+		"insights.averageTestDuration.baseline": {
+			"supported": false,
+			"reason": "The Newman reporter does not emit this optional property"
+		},
+		"insights.averageTestDuration.change": {
+			"supported": false,
+			"reason": "The Newman reporter does not emit this optional property"
+		},
+		"insights.runsAnalyzed": {
+			"supported": false,
+			"reason": "The Newman reporter does not emit this optional property"
+		},
+		"insights.extra": {
+			"supported": false,
+			"reason": "The Newman reporter does not emit this optional property"
+		},
+		"baseline": {
+			"supported": false,
+			"reason": "The Newman reporter does not emit this optional property"
+		},
+		"baseline.reportId": {
+			"supported": false,
+			"reason": "The Newman reporter does not emit this optional property"
+		},
+		"baseline.timestamp": {
+			"supported": false,
+			"reason": "The Newman reporter does not emit this optional property"
+		},
+		"baseline.source": {
+			"supported": false,
+			"reason": "The Newman reporter does not emit this optional property"
+		},
+		"baseline.buildNumber": {
+			"supported": false,
+			"reason": "The Newman reporter does not emit this optional property"
+		},
+		"baseline.buildName": {
+			"supported": false,
+			"reason": "The Newman reporter does not emit this optional property"
+		},
+		"baseline.buildUrl": {
+			"supported": false,
+			"reason": "The Newman reporter does not emit this optional property"
+		},
+		"baseline.commit": {
+			"supported": false,
+			"reason": "The Newman reporter does not emit this optional property"
+		},
+		"baseline.extra": {
+			"supported": false,
+			"reason": "The Newman reporter does not emit this optional property"
+		}
+	},
+	"rules": {
+		"utf8-without-bom": {
+			"supported": true,
+			"reason": "Supported by native assertions and independent emissions"
+		},
+		"single-json-object": {
+			"supported": true,
+			"reason": "Supported by native assertions and independent emissions"
+		},
+		"declares-supported-contract": {
+			"supported": true,
+			"reason": "Supported by native assertions and independent emissions"
+		},
+		"summary-matches-final-results": {
+			"supported": true,
+			"reason": "Supported by native assertions and independent emissions"
+		},
+		"summary-matches-flaky-results": {
+			"supported": false,
+			"reason": "Newman emits no optional retry/flaky, attempt, attachment or summary.flaky data; iterations are separate executions, not retries"
+		},
+		"orders-start-and-stop": {
+			"supported": true,
+			"reason": "Supported by native assertions and independent emissions"
+		},
+		"history-requires-retry-count": {
+			"supported": false,
+			"reason": "Newman emits no optional retry/flaky, attempt, attachment or summary.flaky data; iterations are separate executions, not retries"
+		},
+		"positive-retries-require-history": {
+			"supported": false,
+			"reason": "Newman emits no optional retry/flaky, attempt, attachment or summary.flaky data; iterations are separate executions, not retries"
+		},
+		"zero-retries-omit-history": {
+			"supported": false,
+			"reason": "Newman emits no optional retry/flaky, attempt, attachment or summary.flaky data; iterations are separate executions, not retries"
+		},
+		"retry-count-matches-history-length": {
+			"supported": false,
+			"reason": "Newman emits no optional retry/flaky, attempt, attachment or summary.flaky data; iterations are separate executions, not retries"
+		},
+		"history-orders-contiguous-attempts": {
+			"supported": false,
+			"reason": "Newman emits no optional retry/flaky, attempt, attachment or summary.flaky data; iterations are separate executions, not retries"
+		},
+		"history-excludes-final-attempt": {
+			"supported": false,
+			"reason": "Newman emits no optional retry/flaky, attempt, attachment or summary.flaky data; iterations are separate executions, not retries"
+		},
+		"flaky-matches-attempt-outcomes": {
+			"supported": false,
+			"reason": "Newman emits no optional retry/flaky, attempt, attachment or summary.flaky data; iterations are separate executions, not retries"
+		},
+		"case-identity-stable-across-runs": {
+			"supported": true,
+			"reason": "Supported by native assertions and independent emissions"
+		},
+		"execution-identity-distinguishes-executions": {
+			"supported": true,
+			"reason": "Supported by native assertions and independent emissions"
+		},
+		"attempt-identity-scoped-to-execution": {
+			"supported": false,
+			"reason": "Newman emits no optional retry/flaky, attempt, attachment or summary.flaky data; iterations are separate executions, not retries"
+		},
+		"attachment-identity-scoped-to-parent": {
+			"supported": false,
+			"reason": "Newman emits no optional retry/flaky, attempt, attachment or summary.flaky data; iterations are separate executions, not retries"
+		},
+		"document-identity-follows-emission": {
+			"supported": true,
+			"reason": "Supported by native assertions and independent emissions"
+		},
+		"coordinates-run-and-shard-identity": {
+			"supported": true,
+			"reason": "Supported by native assertions and independent emissions"
+		},
+		"respects-reserved-extension-ownership": {
+			"supported": true,
+			"reason": "Supported by native assertions and independent emissions"
+		}
+	}
+}
