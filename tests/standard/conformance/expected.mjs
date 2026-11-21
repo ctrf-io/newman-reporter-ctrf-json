@@ -57,7 +57,7 @@ export function expectedReport(native, options) {
 		summary[status] = tests.filter((test) => test.status === status).length;
 	return {
 		reportFormat: "CTRF",
-		specVersion: "0.2.0",
+		specVersion: "0.3.0",
 		generatedBy: "newman-reporter-ctrf-json",
 		...(options.runId ? { runId: options.runId } : {}),
 		results: {
